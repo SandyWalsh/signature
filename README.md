@@ -42,7 +42,7 @@ For example, lets say we need to ensure ```./impl_1.py Impl1.method_a``` needs t
 ```./drivers/impl2.py Impl2.method_b``` your configuration dict would look like:
 
 ```
-{"mates": [['./impl1.py|Impl1.method_a', './drivers/impl2.py|Impl2.method_b']]}
+{"mates": [['./impl1.py|impl1:.Impl1.method_a', './drivers/impl2.py|impl2:Impl2.method_b']]}
 ```
 
 It's a list of lists because you likely have lots of different Signature mates you
@@ -50,7 +50,7 @@ need to validate.
 
 Other examples are:
 ```my_module.function_name
-./extensions/foobar.py|Foobar.method_name
+./extensions/foobar.py|extensions.foobar:Foobar.method_name
 my_module:MyClass.my_method
 my_file.py|my_module:MyClass.my_method
 ```
