@@ -29,13 +29,38 @@ class Blah(object):
 Everything is fine so long as the signatures for replace_me and real_implementation
 are the same. Unit tests generally won't find these sorts of bugs, but Signature can.
 
+Signature takes a dict-based configuration file. The primary key is called ```mates```.
+Mates contains a list of lists of matching methods or functions with matching signatures.
+
+The format of a method/function signature is:
+```
+<path/to/python/file.py|>path.to.namespace:<ClassName.>method_or_function_name
+```
+
+For example, lets say we need to ensure ```./impl_1.py Impl1.method_a``` needs to match
+```./drivers/impl2.py Impl2.method_b``` your configuration dict would look like:
+
+```
+{"mates": [['./impl1.py|Impl1.method_a', './drivers/impl2.py|Impl2.method_b']]}
+It's a list of lists because you likely have lots of different Signature mates you
+need to validate.
+
+Other examples are:
+```my_module.function_name
+./extensions/foobar.py|Foobar.method_name
+my_module:MyClass.my_method
+my_file.py|my_module:MyClass.my_method
+```
+
+You can call Signature from existing Python code with:
+
 ```python
 import signature
 check(dict(mates=[['__main__:Foo.replace_me', '__main__:Blah.real_implementation']]),
       raise_on_error=True)
 ```
 
-alternatively you can put this configuration in a JSON file and run Signature there:
+or, you can put this configuration in a JSON file and run Signature from the cmdline:
 
 ```bash
  # python signature.py sample.json 
