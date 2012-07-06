@@ -11,20 +11,26 @@ For example:
 
 Let's say we had a class that had a method with a specific signature:
 
+```python
 class Foo(object):
     def replace_me(self, a, b=1, c="hello"):
         pass
+```
 
 and another object that could take the place of Foo (like a "driver" or "plugin"
 mechanism):
 
+```python
 class Blah(object):
     def real_implementation(self, a, b=1, c="hello"):
         pass
+```
 
 Everything is fine so long as the signatures for replace_me and real_implementation
 are the same. Unit tests generally won't find these sorts of bugs, but Signature can.
 
+```python
 import signature
 check(dict(mates=[['__main__:Foo.replace_me', '__main__:Blah.real_implementation']]),
       raise_on_error=True)
+```
