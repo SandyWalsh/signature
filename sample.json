@@ -1,6 +1,16 @@
 {"mates":[
     ["watch.py|__main__:function_a", 
+     "watch.py|__main__:function_b"],
+ 
+    ["watch.py|__main__:function_a", 
      "watch.py|__main__:function_b", 
-     "watch.py|__main__:function_c"]
+     "watch.py|__main__:function_c"],
+
+    ["watch.py|__main__:Foo.method_a", 
+     "watch.py|__main__:Blah.method_a"],
+
+    ["watch.py|__main__:Foo.method_a", 
+     "watch.py|__main__:Blah.method_a", 
+     "watch.py|__main__:Blah.method_b"]
   ]
 }

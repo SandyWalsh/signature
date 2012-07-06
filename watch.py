@@ -17,8 +17,9 @@ def find_code(target):
     filename, sep, namespace= target.rpartition('|')
     module, sep, klass_or_function = namespace.rpartition(':')
     if filename:
-        if os.path.isfile(filename):
-            imp.load_source('signature_%s' % filename, filename)
+        if not module in sys.modules:
+            if os.path.isfile(filename):
+                imp.load_source(module, filename)
 
     if not module:
         raise Exception("Need a module path for %s" % namespace)
@@ -33,14 +34,34 @@ def find_code(target):
     if not klass:
         return getattr(sys.modules[module], function)
 
+    klass_object = getattr(sys.modules[module], klass)
+    return getattr(klass_object, function)
+
+
+class Foo(object):
+    def method_a(self, a, b, c, d):
+        pass
+
+
+class Blah(object):
+    def method_a(self, a, b, c, d):
+        pass
+
+    def method_b(self, a, b, c, e):
+        pass
+
+
 def function_a(a, b, c, d):
     pass
+
 
 def function_b(a, b, c, d):
     pass
 
+
 def function_c(a, b, c, e):
     pass
+
 
 def check(config):
     mates = config['mates']
@@ -61,8 +82,8 @@ def check(config):
             sigs.append((mate, sig))
 
         if mismatch:
-            print "-----Mismatch!-----"
-            for mate, sig in sigs:
+           print "-----Mismatch!-----"
+           for mate, sig in sigs:
                 print mate, sig
 
 
