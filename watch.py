@@ -19,16 +19,19 @@ def find_code(target):
     if filename:
         if not module in sys.modules:
             if os.path.isfile(filename):
+                print "Loading", filename
                 imp.load_source(module, filename)
 
     if not module:
         raise Exception("Need a module path for %s" % namespace)
 
-    try:
-        __import__(module)
-    except ImportError, exc:
-        raise Exception("Could not import %s\n%s" % (module,
-                                        traceback.format_exc(exc)))
+    if not module in sys.modules:
+        try:
+            print "Importing", module
+            __import__(module)
+        except ImportError, exc:
+            raise Exception("Could not import %s\n%s" % (module,
+                                            traceback.format_exc(exc)))
 
     klass, sep, function = klass_or_function.rpartition('.')
     if not klass:
