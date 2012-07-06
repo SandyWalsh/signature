@@ -1,24 +1,24 @@
 {"mates":[
-    ["|__main__:function_a", 
-     "|__main__:function_b"],
+    ["__main__:function_a", 
+     "__main__:function_b"],
  
-    ["|__main__:function_a", 
-     "|__main__:function_b", 
-     "|__main__:function_c"],
+    ["__main__:function_a", 
+     "__main__:function_b", 
+     "__main__:function_c"],
 
-    ["|__main__:Foo.method_a", 
-     "|__main__:Blah.method_a"],
+    ["__main__:Foo.method_a", 
+     "__main__:Blah.method_a"],
 
-    ["|__main__:Foo.method_a", 
-     "|__main__:Blah.method_a", 
-     "|__main__:Blah.method_b"],
+    ["__main__:Foo.method_a", 
+     "__main__:Blah.method_a", 
+     "__main__:Blah.method_b"],
 
-    ["|__main__:Foo.method_a", 
-     "|test_module:Foo.method_a", 
+    ["__main__:Foo.method_a", 
+     "test_module:Foo.method_a", 
      "./external/test_module.py|external.test_module:Blah.method_a"],
 
-    ["|__main__:Foo.method_a", 
-     "|test_module:Blah.method_a", 
+    ["__main__:Foo.method_a", 
+     "test_module:Blah.method_a", 
      "./external/test_module.py|external.test_module:Blah.method_b"]
   ]
 }
