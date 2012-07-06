@@ -34,3 +34,21 @@ import signature
 check(dict(mates=[['__main__:Foo.replace_me', '__main__:Blah.real_implementation']]),
       raise_on_error=True)
 ```
+
+alternatively you can put this configuration in a JSON file and run Signature there:
+
+```bash
+ # python signature.py sample.json 
+ -----Mismatch-----
+ __main__:function_a ArgSpec(args=['a', 'b', 'c', 'd'], varargs=None, keywords=None, defaults=None)
+ __main__:function_b ArgSpec(args=['a', 'b', 'c', 'd'], varargs=None, keywords=None, defaults=None)
+ __main__:function_c ArgSpec(args=['a', 'b', 'c', 'e'], varargs=None, keywords=None, defaults=None)
+ -----Mismatch-----
+ __main__:Foo.method_a ArgSpec(args=['self', 'a', 'b', 'c', 'd'], varargs=None, keywords=None, defaults=None)
+ __main__:Blah.method_a ArgSpec(args=['self', 'a', 'b', 'c', 'd'], varargs=None, keywords=None, defaults=None)
+ __main__:Blah.method_b ArgSpec(args=['self', 'a', 'b', 'c', 'e'], varargs=None, keywords=None, defaults=None)
+ -----Mismatch-----
+ __main__:Foo.method_a ArgSpec(args=['self', 'a', 'b', 'c', 'd'], varargs=None, keywords=None, defaults=None)
+ test_module:Blah.method_a ArgSpec(args=['self', 'a', 'b', 'c', 'd'], varargs=None, keywords=None, defaults=None)
+ ./external/test_module.py|external.test_module:Blah.method_b ArgSpec(args=['self', 'a', 'b', 'c', 'e'], varargs=None, keywords=None, defaults=None)
+```
