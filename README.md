@@ -59,7 +59,7 @@ You can call Signature from existing Python code with:
 
 ```python
 import signature
-check(dict(mates=[['__main__:Foo.replace_me', '__main__:Blah.real_implementation']]),
+signature.check(dict(mates=[['__main__:Foo.replace_me', '__main__:Blah.real_implementation']]),
       raise_on_error=True)
 ```
 
