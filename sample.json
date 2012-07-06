@@ -11,6 +11,14 @@
 
     ["watch.py|__main__:Foo.method_a", 
      "watch.py|__main__:Blah.method_a", 
-     "watch.py|__main__:Blah.method_b"]
+     "watch.py|__main__:Blah.method_b"],
+
+    ["watch.py|__main__:Foo.method_a", 
+     "test_module.py|test_module:Foo.method_a", 
+     "./external/test_module.py|external.test_module:Blah.method_a"],
+
+    ["watch.py|__main__:Foo.method_a", 
+     "test_module.py|test_module:Blah.method_a", 
+     "./external/test_module.py|external.test_module:Blah.method_b"]
   ]
 }
