@@ -42,6 +42,8 @@ For example, lets say we need to ensure ```./impl_1.py Impl1.method_a``` needs t
 
 ```
 {"mates": [['./impl1.py|Impl1.method_a', './drivers/impl2.py|Impl2.method_b']]}
+```
+
 It's a list of lists because you likely have lots of different Signature mates you
 need to validate.
 
