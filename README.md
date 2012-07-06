@@ -7,8 +7,9 @@ This is useful for comparing method/function signatures of mocked unit test code
 against production code. If the signatures no longer match up, you can catch
 these errors early without having to resort to complicated integration tests.
 
-For example:
+(For more background on the problem, read my blog post here: http://www.sandywalsh.com/2011/08/pain-of-unit-tests-and-dynamically.html )
 
+For example:
 Let's say we had a class that had a method with a specific signature:
 
 ```python
