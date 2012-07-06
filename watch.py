@@ -19,19 +19,13 @@ def find_code(target):
     if filename:
         if not module in sys.modules:
             if os.path.isfile(filename):
-                print "Loading", filename
                 imp.load_source(module, filename)
 
     if not module:
         raise Exception("Need a module path for %s" % namespace)
 
     if not module in sys.modules:
-        try:
-            print "Importing", module
-            __import__(module)
-        except ImportError, exc:
-            raise Exception("Could not import %s\n%s" % (module,
-                                            traceback.format_exc(exc)))
+        __import__(module)
 
     klass, sep, function = klass_or_function.rpartition('.')
     if not klass:
@@ -69,6 +63,7 @@ def function_c(a, b, c, e):
 def check(config):
     mates = config['mates']
 
+    results = []
     for block in mates:
         last_mate = None
         last_sig = None
@@ -81,16 +76,18 @@ def check(config):
                 mismatch = True
             last_mate = mate
             last_sig = sig
-
             sigs.append((mate, sig))
-
-        if mismatch:
-           print "-----Mismatch!-----"
-           for mate, sig in sigs:
-                print mate, sig
+        results.append((mismatch, sigs))
+    return results
 
 
 if __name__ == '__main__':
     with open('sample.json') as f:
         config = json.load(f)
-    check(config)
+    results = check(config)
+
+    for mismatch, sigs in results:
+        if mismatch:
+           print "-----Mismatch-----"
+           for mate, sig in sigs:
+                print mate, sig
